@@ -14,6 +14,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResult);
     }
 
+    @ExceptionHandler(TrainerNotExistException.class)
+    public ResponseEntity<ErrorResult> handleTrainerNotExistException(TrainerNotExistException e) {
+        ErrorResult errorResult = new ErrorResult(404,"Not Found",e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResult);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResult> handle(MethodArgumentNotValidException e) {
         String message = e.getBindingResult().getFieldError().getDefaultMessage();

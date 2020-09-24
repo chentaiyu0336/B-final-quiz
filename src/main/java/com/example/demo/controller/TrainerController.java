@@ -24,4 +24,10 @@ public class TrainerController {
         return trainerService.addTrainer(trainer);
     }
 
+    @DeleteMapping("/{trainer_id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteTrainerById(@PathVariable Long trainer_id) {
+        trainerService.deleteTrainerById(trainer_id);
+    }
+
 }
