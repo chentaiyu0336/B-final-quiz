@@ -30,6 +30,7 @@ public class GroupService {
     public List<Groups> divideGroup() {
         List<Trainee> allTrainees = traineeRepository.findAll();
         List<Trainer> allTrainers = trainerRepository.findAll();
+        System.out.println(allTrainers);
         if (allTrainers.size() < 2) {
             throw new CannotDivideException("分组失败");
         }
@@ -41,25 +42,30 @@ public class GroupService {
         Collections.shuffle(allTrainers);
 
 
-        int groupCount = allTrainees.size() / 2;
+        int groupCount = allTrainers.size() / 2 ;
+        System.out.println("---------------------" + allTrainers.size());
+        System.out.println("groupCount: " + groupCount);
 
         for (int i = 0; i < groupCount; i++) {
             int groupNum = i + 1;
-            Trainer trainer1 = allTrainers.get(2 * i);
-            Trainer trainer2 = allTrainers.get(2 * i + 1);
-            trainer1.setGrouped("true");
-            trainer2.setGrouped("true");
-            trainerRepository.save(trainer1);
-            trainerRepository.save(trainer2);
-            List<Trainer> groupTrainers = new ArrayList<>();
-            groupTrainers.add(trainer1);
-            groupTrainers.add(trainer2);
+            System.out.println("groupNum: " + groupNum);
+
             Groups groups = Groups.builder()
                     .name(groupNum + "组")
-                    .trainers(groupTrainers)
+                    .trainers(new ArrayList<>())
                     .trainees(new ArrayList<>())
                     .build();
             groupsList.add(groups);
+        }
+
+        int count = 0;
+        for (Trainer trainer : allTrainers) {
+            if (count == (groupCount-1) && count % 2 == 0)
+                break;
+            trainer.setGrouped("true");
+            groupsList.get(count % groupCount).getTrainers().add(trainer);
+            trainerRepository.save(trainer);
+            count++;
         }
 
         int index = 0;
@@ -79,7 +85,7 @@ public class GroupService {
     }
 
     public void updateGroupName(Long id, String name) {
-        Groups groups = groupRepository.findById(id).orElseThrow(()->new GroupNotExistException("该组不存在"));
+        Groups groups = groupRepository.findById(id).orElseThrow(() -> new GroupNotExistException("该组不存在"));
         groups.setName(name);
         groupRepository.save(groups);
     }
