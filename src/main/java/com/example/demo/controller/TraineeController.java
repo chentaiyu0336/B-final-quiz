@@ -16,15 +16,10 @@ public class TraineeController {
         this.traineeService = traineeService;
     }
 
-//    @GetMapping("")
-//    public List<Trainee> getTraineeList(@RequestParam(required = false) String gender) {
-//        return traineeService.getTraineeList(gender);
-//    }
-
-//    @GetMapping("/{id}")
-//    public Trainee getTraineeById(@PathVariable Integer id) {
-//        return traineeService.getTraineeById(id);
-//    }
+    @GetMapping("trainees")
+    public List<Trainee> getUnGroupedTraineeList(@RequestParam(value = "grouped",required = false) boolean grouped) {
+        return traineeService.getUnGroupedTraineeList(grouped);
+    }
 
     @PostMapping("/trainees")
     @ResponseStatus(HttpStatus.CREATED)

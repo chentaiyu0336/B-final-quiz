@@ -6,5 +6,5 @@ spring:
     password: pass
   jpa:
     hibernate:
-      ddl-auto:  create # 如果数据库不存在就创建
-#    show-sql: true    # 打印数据库语句
+      ddl-auto:  update # 如果数据库不存在就创建
+    show-sql: true    # 打印数据库语句

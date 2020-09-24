@@ -5,6 +5,7 @@ import com.example.demo.repository.TraineeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TraineeService {
@@ -14,12 +15,6 @@ public class TraineeService {
         this.traineeRepository = traineeRepository;
     }
 
-//    public List<Trainee> getTraineeList(String gender) {
-//        if (gender == null)
-//            return traineeRepository.getStudentList();
-//        else
-//            return traineeRepository.filterStudentsByGender(gender);
-//    }
 
     public void addTrainee(Trainee trainee) {
         traineeRepository.save(trainee);
@@ -29,4 +24,8 @@ public class TraineeService {
         traineeRepository.deleteById(id);
     }
 
+    public List<Trainee> getUnGroupedTraineeList(boolean grouped) {
+        List<Trainee> allTrainee=traineeRepository.findAll();
+        return allTrainee.stream().filter(trainee -> trainee.isGrouped()==grouped).collect(Collectors.toList());
+    }
 }
