@@ -26,6 +26,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResult);
     }
 
+    @ExceptionHandler(GroupNotExistException.class)
+    public ResponseEntity<ErrorResult> handleGroupNotExistException(GroupNotExistException e) {
+        ErrorResult errorResult = new ErrorResult(404,"Bad Request",e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResult);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResult> handle(MethodArgumentNotValidException e) {
         String message = e.getBindingResult().getFieldError().getDefaultMessage();

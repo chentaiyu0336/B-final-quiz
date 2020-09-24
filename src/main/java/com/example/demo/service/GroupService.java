@@ -4,6 +4,7 @@ import com.example.demo.domain.Groups;
 import com.example.demo.domain.Trainee;
 import com.example.demo.domain.Trainer;
 import com.example.demo.exception.CannotDivideException;
+import com.example.demo.exception.GroupNotExistException;
 import com.example.demo.repository.GroupRepository;
 import com.example.demo.repository.TraineeRepository;
 import com.example.demo.repository.TrainerRepository;
@@ -75,5 +76,11 @@ public class GroupService {
 
     public List<Groups> getGroups() {
         return groupRepository.findAll();
+    }
+
+    public void updateGroupName(Long id, String name) {
+        Groups groups = groupRepository.findById(id).orElseThrow(()->new GroupNotExistException("该组不存在"));
+        groups.setName(name);
+        groupRepository.save(groups);
     }
 }
