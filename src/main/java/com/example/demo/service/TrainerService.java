@@ -29,6 +29,6 @@ public class TrainerService {
 
     public List<Trainer> getUnGroupedTrainerList(String grouped) {
         List<Trainer> allTrainer=trainerRepository.findAll();
-        return allTrainer.stream().filter(trainer -> trainer.equals(grouped)).collect(Collectors.toList());
+        return allTrainer.stream().filter(trainer -> trainer.getGrouped().equals(grouped)).collect(Collectors.toList());
     }
 }
