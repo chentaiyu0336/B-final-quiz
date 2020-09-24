@@ -5,9 +5,11 @@ import com.example.demo.service.TraineeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("/trainees")
 @CrossOrigin
 public class TraineeController {
     private final TraineeService traineeService;
@@ -16,18 +18,18 @@ public class TraineeController {
         this.traineeService = traineeService;
     }
 
-    @GetMapping("trainees")
+    @GetMapping("")
     public List<Trainee> getUnGroupedTraineeList(@RequestParam(value = "grouped",required = false) boolean grouped) {
         return traineeService.getUnGroupedTraineeList(grouped);
     }
 
-    @PostMapping("/trainees")
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addNewTrainee(@RequestBody Trainee trainee) {
-        traineeService.addTrainee(trainee);
+    public Trainee addNewTrainee(@RequestBody @Valid Trainee trainee) {
+        return traineeService.addTrainee(trainee);
     }
 
-    @DeleteMapping("/trainees/{trainee_id}")
+    @DeleteMapping("/{trainee_id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteTraineeById(@PathVariable Long trainee_id) {
         traineeService.deleteTraineeById(trainee_id);

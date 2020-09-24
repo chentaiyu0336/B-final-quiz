@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.domain.Trainee;
+import com.example.demo.exception.TraineeNotExistException;
 import com.example.demo.repository.TraineeRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +17,13 @@ public class TraineeService {
     }
 
 
-    public void addTrainee(Trainee trainee) {
+    public Trainee addTrainee(Trainee trainee) {
         traineeRepository.save(trainee);
+        return trainee;
     }
 
     public void deleteTraineeById(Long id) {
+        traineeRepository.findById(id).orElseThrow(()->new TraineeNotExistException("学员不存在"));
         traineeRepository.deleteById(id);
     }
 
