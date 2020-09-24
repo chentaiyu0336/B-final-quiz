@@ -39,6 +39,10 @@ public class Trainee {
 
     @JsonIgnore
     @Builder.Default
-    private boolean grouped = false;
+    private String grouped = "false";
+
+    @ManyToOne
+    @JsonIgnore
+    private Groups groups;
 
 }

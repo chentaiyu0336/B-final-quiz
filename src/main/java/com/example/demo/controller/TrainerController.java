@@ -20,7 +20,7 @@ public class TrainerController {
     }
 
     @GetMapping("")
-    public List<Trainer> getUnGroupedTrainerList(@RequestParam(value = "grouped",required = false) boolean grouped) {
+    public List<Trainer> getUnGroupedTrainerList(@RequestParam(value = "grouped",required = false) String grouped) {
         return trainerService.getUnGroupedTrainerList(grouped);
     }
 

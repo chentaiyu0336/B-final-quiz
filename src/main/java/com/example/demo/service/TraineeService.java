@@ -27,8 +27,8 @@ public class TraineeService {
         traineeRepository.deleteById(id);
     }
 
-    public List<Trainee> getUnGroupedTraineeList(boolean grouped) {
+    public List<Trainee> getUnGroupedTraineeList(String grouped) {
         List<Trainee> allTrainee=traineeRepository.findAll();
-        return allTrainee.stream().filter(trainee -> trainee.isGrouped()==grouped).collect(Collectors.toList());
+        return allTrainee.stream().filter(trainee -> trainee.getGrouped().equals(grouped)).collect(Collectors.toList());
     }
 }

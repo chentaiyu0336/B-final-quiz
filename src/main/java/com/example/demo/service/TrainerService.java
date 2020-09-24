@@ -27,8 +27,8 @@ public class TrainerService {
         trainerRepository.deleteById(id);
     }
 
-    public List<Trainer> getUnGroupedTrainerList(boolean grouped) {
+    public List<Trainer> getUnGroupedTrainerList(String grouped) {
         List<Trainer> allTrainer=trainerRepository.findAll();
-        return allTrainer.stream().filter(trainer -> trainer.isGrouped()==grouped).collect(Collectors.toList());
+        return allTrainer.stream().filter(trainer -> trainer.equals(grouped)).collect(Collectors.toList());
     }
 }

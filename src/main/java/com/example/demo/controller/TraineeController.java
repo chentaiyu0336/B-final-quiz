@@ -19,7 +19,7 @@ public class TraineeController {
     }
 
     @GetMapping("")
-    public List<Trainee> getUnGroupedTraineeList(@RequestParam(value = "grouped",required = false) boolean grouped) {
+    public List<Trainee> getUnGroupedTraineeList(@RequestParam(value = "grouped",required = false) String grouped) {
         return traineeService.getUnGroupedTraineeList(grouped);
     }
 
