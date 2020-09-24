@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,4 +21,7 @@ public class Trainer {
     Long id;
     @NotEmpty(message = "讲师名字不能为空")
     String name;
+    @JsonIgnore
+    @Builder.Default
+    private boolean grouped = false;
 }

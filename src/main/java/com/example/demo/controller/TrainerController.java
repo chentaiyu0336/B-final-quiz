@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/trainers")
@@ -16,6 +17,11 @@ public class TrainerController {
 
     public TrainerController(TrainerService trainerService) {
         this.trainerService = trainerService;
+    }
+
+    @GetMapping("")
+    public List<Trainer> getUnGroupedTrainerList(@RequestParam(value = "grouped",required = false) boolean grouped) {
+        return trainerService.getUnGroupedTrainerList(grouped);
     }
 
     @PostMapping("")
@@ -29,5 +35,7 @@ public class TrainerController {
     public void deleteTrainerById(@PathVariable Long trainer_id) {
         trainerService.deleteTrainerById(trainer_id);
     }
+
+
 
 }
