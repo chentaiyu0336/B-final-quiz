@@ -72,4 +72,8 @@ public class GroupService {
         groupRepository.saveAll(groupsList);
         return groupsList;
     }
+
+    public List<Groups> getGroups() {
+        return groupRepository.findAll();
+    }
 }
