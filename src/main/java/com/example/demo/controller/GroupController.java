@@ -27,6 +27,8 @@ public class GroupController {
     public List<Groups> getGroups() {
         return groupService.getGroups();
     }
+
+    //TODO GTB:BUG，新名称与已有分组名称重复时，未按需求处理
     @PatchMapping("/{group_id}")
     //TODO GTB：组合词，后端一般使用驼峰形式。
     //TODO GTB：@RequestBody一般不用String来接。如果这里是String，当body是{"name": "new name"}这种JSON格式的就会整个String set上去。
