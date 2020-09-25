@@ -28,9 +28,12 @@ public class GroupService {
     }
 
     public List<Groups> divideGroup() {
+        //TODO GTB：这个方法太长了，需要分模块抽方法重构
+        //TODO GTB：整个方法看下来，更像是面向过程的写法，考虑下用面向对象的思维该怎么写
         List<Trainee> allTrainees = traineeRepository.findAll();
         List<Trainer> allTrainers = trainerRepository.findAll();
         System.out.println(allTrainers);
+        //TODO GTB：Magic Number 2，Exception message可以考虑抽成常量
         if (allTrainers.size() < 2) {
             throw new CannotDivideException("分组失败");
         }
@@ -43,6 +46,7 @@ public class GroupService {
 
 
         int groupCount = allTrainers.size() / 2 ;
+        //TODO GTB: 尽量避免控制台输出log，可以看看@Slf4j，以及log输出规范
         System.out.println("---------------------" + allTrainers.size());
         System.out.println("groupCount: " + groupCount);
 
@@ -51,6 +55,7 @@ public class GroupService {
             System.out.println("groupNum: " + groupNum);
 
             Groups groups = Groups.builder()
+                    //TODO GTB：需要抽取常量
                     .name(groupNum + "组")
                     .trainers(new ArrayList<>())
                     .trainees(new ArrayList<>())
@@ -85,6 +90,7 @@ public class GroupService {
     }
 
     public void updateGroupName(Long id, String name) {
+        //TODO GTB：需要抽取常量
         Groups groups = groupRepository.findById(id).orElseThrow(() -> new GroupNotExistException("该组不存在"));
         groups.setName(name);
         groupRepository.save(groups);

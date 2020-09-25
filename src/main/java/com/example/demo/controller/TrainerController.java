@@ -19,6 +19,7 @@ public class TrainerController {
         this.trainerService = trainerService;
     }
 
+    //TODO GTB：BUG，当自动分组完成后，已经被分组的讲师，仍然会出现在这个list中
     @GetMapping("")
     public List<Trainer> getUnGroupedTrainerList(@RequestParam(value = "grouped",required = false) String grouped) {
         return trainerService.getUnGroupedTrainerList(grouped);

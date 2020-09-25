@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 @Repository
 public interface TraineeRepository extends JpaRepository<Trainee,Long> {
+    //TODO GTB: 删掉无必要的注释
 //    private static List<Trainee> traineeList = new ArrayList<Trainee>();
 //
 //    {

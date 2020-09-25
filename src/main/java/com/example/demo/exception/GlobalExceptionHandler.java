@@ -6,6 +6,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+//TODO GTB：404的Exception是否可以统一成一个？
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(TraineeNotExistException.class)

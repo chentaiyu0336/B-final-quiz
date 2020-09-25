@@ -18,11 +18,13 @@ public class TraineeController {
         this.traineeService = traineeService;
     }
 
+    //TODO GTB: 如果path为空，可以不写""
     @GetMapping("")
     public List<Trainee> getUnGroupedTraineeList(@RequestParam(value = "grouped",required = false) String grouped) {
         return traineeService.getUnGroupedTraineeList(grouped);
     }
 
+    //TODO GTB: 如果path为空，可以不写""
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public Trainee addNewTrainee(@RequestBody @Valid Trainee trainee) {
@@ -31,6 +33,7 @@ public class TraineeController {
 
     @DeleteMapping("/{trainee_id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    //TODO GTB：组合词，后端一般使用驼峰形式。
     public void deleteTraineeById(@PathVariable Long trainee_id) {
         traineeService.deleteTraineeById(trainee_id);
     }

@@ -29,6 +29,7 @@ public class TraineeService {
 
     public List<Trainee> getUnGroupedTraineeList(String grouped) {
         List<Trainee> allTrainee=traineeRepository.findAll();
+        //TODO GTB: stream的每个操作，考虑换下行
         return allTrainee.stream().filter(trainee -> trainee.getGrouped().equals(grouped)).collect(Collectors.toList());
     }
 }

@@ -39,6 +39,7 @@ public class Trainee {
 
     @JsonIgnore
     @Builder.Default
+    //TODO GTB: grouped看起来就两个状态，true/false，考虑下boolean？
     private String grouped = "false";
 
     @ManyToOne
